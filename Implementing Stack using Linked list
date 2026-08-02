@@ -71,8 +71,8 @@ push(sp,59);
 push(sp,94);//pushed 10 values
 push(sp,87);//stack overflow since the size of the stack is 10
 
-printf("after pushing, full: %d",isfull(sp));
-printf("after pushing, empty: %d",isempty(sp));
+printf("after pushing, full: %d\n",isfull(sp));
+printf("after pushing, empty: %d\n",isempty(sp));
 
 printf("popped %d from the stack\n",pop(sp));
 printf("popped %d from the stack\n",pop(sp));
