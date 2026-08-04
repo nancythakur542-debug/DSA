@@ -35,6 +35,7 @@ void Dequeue()
     {
         num=Queue[F];
         F=F+1;
+        printf("deleted element is %d\n",num);
     }
     if(F>R)
     {
