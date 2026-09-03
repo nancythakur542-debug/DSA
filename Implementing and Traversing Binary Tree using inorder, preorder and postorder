@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int data;
+    struct node *left, *right;
+};
+struct node *create_bt()
+{
+    struct node *p;
+    p=(struct node*)malloc(sizeof(struct node));
+    int key;
+    printf("\nEnter the key value ( -1 for Null):");
+    scanf("%d",&key);
+    if(key==-1)
+    {
+        free(p);
+        return NULL;
+    }
+    p->data = key;
+    printf("\nEnter the left child of key %d",key);
+    p->left = create_bt();
+    printf("Enter the right child of key %d",key);
+    p->right = create_bt();
+    return p;
+}
+
+void inorder(struct node *root)
+{
+    if(root!=NULL)
+    {
+        inorder(root->left);
+        printf("%d",root->data);
+        inorder(root->right);
+    }
+}
+
+void preorder(struct node *root)
+{ if(root!=NULL){
+    printf("%d",root->data);
+    preorder(root->left);
+    preorder(root->right);
+}
+}
+
+void postorder(struct node *root)
+{  
+  if(root!=NULL){
+   preorder(root->left);
+   preorder(root->right);
+   printf("%d",root->data);
+   }
+}
+
+
+int main() {
+    struct node *root;
+    root=NULL;
+    root = create_bt();
+    
+    printf("\nInorder traversal of the binary tree");
+    inorder(root);
+    
+    printf("\npreorder traversal of the binary tree");
+    preorder(root);
+    
+    printf("\npostorder traversal of the binary tree");
+    postorder(root);
+    printf("\n");
+
+    return 0;
+}
