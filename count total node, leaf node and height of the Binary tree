@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int data;
+    struct node *left, *right;
+};
+struct node *create_bt()
+{
+    struct node *p;
+    p=(struct node*)malloc(sizeof(struct node));
+    int key;
+    printf("\nEnter the key value ( -1 for Null):");
+    scanf("%d",&key);
+    if(key==-1)
+    {
+        free(p);
+        return NULL;
+    }
+    p->data = key;
+    printf("\nEnter the left child of key %d",key);
+    p->left = create_bt();
+    printf("Enter the right child of key %d",key);
+    p->right = create_bt();
+    return p;
+}
+
+void inorder(struct node *root)
+{
+    if(root!=NULL)
+    {
+        inorder(root->left);
+        printf("%d",root->data);
+        inorder(root->right);
+    }
+}
+
+void preorder(struct node *root)
+{ if(root!=NULL){
+    printf("%d",root->data);
+    preorder(root->left);
+    preorder(root->right);
+}
+}
+
+void postorder(struct node *root)
+{  
+  if(root!=NULL){
+   postorder(root->left);
+   postorder(root->right);
+   printf("%d",root->data);
+   }
+}
+   int countnodes(struct node *root){
+       if(root==NULL){
+         return 0;
+        }
+         return 1+ countnodes(root->left) + countnodes(root->right);   
+      }
+
+   
+   int leafnodes(struct node *root){
+       if(root==NULL){
+           return 0;
+       }
+       if(root->left==NULL && root->right==NULL){
+           return 1;
+       }
+       return leafnodes(root->left)+leafnodes(root->right);
+   }
+
+   int height(struct node *root){
+       if(root==NULL){
+           return -1;
+       }
+       int leftheight = height(root->left);
+       int rightheight = height(root->right);
+
+       if(leftheight > rightheight){
+           return 1 + leftheight;
+       }
+       else{
+           return 1 + rightheight;
+       }
+   }
+
+
+
+int main() {
+    struct node *root;
+    root=NULL;
+    root = create_bt();
+    
+    
+    printf("\nInorder traversal of the binary tree");
+    inorder(root);
+    
+    printf("\npreorder traversal of the binary tree");
+    preorder(root);
+    
+    printf("\npostorder traversal of the binary tree");
+    postorder(root);
+    printf("\n");
+    
+    printf("Total number of nodes : %d\n",countnodes(root));
+
+    printf("Total number of leafnodes : %d\n",leafnodes(root));
+
+    printf("Height of the Tree is : %d\n",height(root));
+
+    return 0;
+}
